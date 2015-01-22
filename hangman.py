@@ -63,6 +63,9 @@ HANGMANPICS = ['''
 file = open("words.txt", 'r')
 words = file.readline().split()
 
+file = open("highest.txt", 'r')
+highestScore = int(file.readline())
+
 
 def getRandomWord(wordList):
     # This function returns a random string from the passed list of strings.
@@ -132,12 +135,14 @@ def main():
     gameSucceeded = False
     gameFailed = False
     secretWord = getRandomWord(words)
+    myScore = 0
 
     while True:
         displayBoard(HANGMANPICS, missedLetters, correctLetters, secretWord)
 
         if gameSucceeded or gameFailed:
             if gameSucceeded:
+		myScore += 1
                 print('Yes! The secret word is "' + secretWord + '"! You have won!')
             else:
                 print('You have run out of guesses!\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
@@ -150,7 +155,13 @@ def main():
                 gameFailed = False
                 secretWord = getRandomWord(words)
                 continue 
-            else: 
+            else:
+		print("You've got " + str(myScore) + " points!")
+		if myScore > highestScore:
+			print("You've got new record!!")
+			file = open("highest.txt", 'w')
+			file.write(str(myscore))
+			file.close() 
                 break
 
         # Let the player type in a letter.
