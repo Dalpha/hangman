@@ -59,13 +59,15 @@ HANGMANPICS = ['''
  / \  |
       |
 =========''']
-#words = 'ant baboon badger bat bear beaver camel cat clam cobra cougar coyote crow deer dog donkey duck eagle ferret fox frog goat goose hawk lion lizard llama mole monkey moose mouse mule newt otter owl panda parrot pigeon python rabbit ram rat raven rhino salmon seal shark sheep skunk sloth snake spider stork swan tiger toad trout turkey turtle weasel whale wolf wombat zebra'.split()
-file = open("words.txt", 'r')
-words = file.readline().split()
 
-file = open("highest.txt", 'r')
+file = open("highest_score.txt", 'r')
 highestScore = int(file.readline())
 
+#words = 'ant baboon badger bat bear beaver camel cat clam cobra cougar coyote crow deer dog donkey duck eagle ferret fox frog goat goose hawk lion lizard llama mole monkey moose mouse mule newt otter owl panda parrot pigeon python rabbit ram rat raven rhino salmon seal shark sheep skunk sloth snake spider stork swan tiger toad trout turkey turtle weasel whale wolf wombat zebra'.split()
+def readWordList():
+    file = open("words.txt", 'r')
+    words = file.readline().split()
+    return words
 
 def getRandomWord(wordList):
     # This function returns a random string from the passed list of strings.
@@ -126,7 +128,16 @@ def checkWrongAnswer(missedLetters, secretWord):
     if len(missedLetters) == len(HANGMANPICS) - 1:
         return True
     return False
-            
+    
+# Change the record if got new record
+def changeScore(myScore, highestScore):
+    print("You've got " + str(myScore) + " points!")
+    if myScore > highestScore:
+        print("You've got new record!!")
+        file = open("highest_score.txt", 'w')
+        file.write(str(myScore))
+        file.close()
+        
 def main():
     """Main application entry point."""
     print('Dalpha Hangman!')
@@ -134,7 +145,7 @@ def main():
     correctLetters = ''
     gameSucceeded = False
     gameFailed = False
-    secretWord = getRandomWord(words)
+    secretWord = getRandomWord(readWordList())
     myScore = 0
 
     while True:
@@ -156,12 +167,7 @@ def main():
                 secretWord = getRandomWord(words)
                 continue 
             else:
-		print("You've got " + str(myScore) + " points!")
-		if myScore > highestScore:
-			print("You've got new record!!")
-			file = open("highest.txt", 'w')
-			file.write(str(myscore))
-			file.close() 
+                changeScore(myScore, highestScore)
                 break
 
         # Let the player type in a letter.
