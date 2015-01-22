@@ -159,7 +159,7 @@ def main():
 		print("You've got " + str(myScore) + " points!")
 		if myScore > highestScore:
 			print("You've got new record!!")
-			file = open("highest_score.txt", 'w')
+			file = open("highest.txt", 'w')
 			file.write(str(myscore))
 			file.close() 
                 break
