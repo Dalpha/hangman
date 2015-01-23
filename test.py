@@ -5,7 +5,7 @@ class hangmanTestCase(unittest.TestCase):
 
 	def test_checkCorrectAnswer(self):
 		answer = hangman.checkCorrectAnswer("baon", "baboon")
-		self.assertTre(answer)
+		self.assertTrue(answer)
 
 	def test_checkWrongAnswer(self):
 		answer = hangman.checkWrongAnswer("zebrio", "zebra")
