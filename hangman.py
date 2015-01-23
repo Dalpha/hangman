@@ -153,7 +153,7 @@ def main():
 
         if gameSucceeded or gameFailed:
             if gameSucceeded:
-		myScore += 1
+				  myScore += 1
                 print('Yes! The secret word is "' + secretWord + '"! You have won!')
             else:
                 print('You have run out of guesses!\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
