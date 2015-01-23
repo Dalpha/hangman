@@ -140,7 +140,7 @@ def changeScore(myScore, highestScore):
         
 def main():
     """Main application entry point."""
-    print('Dalpha Hangman!!')
+    print('Dalpha Hangman!!!')
     missedLetters = ''
     correctLetters = ''
     gameSucceeded = False
